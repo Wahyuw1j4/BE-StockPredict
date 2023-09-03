@@ -24,7 +24,7 @@ dotenv.config()
 app = express()
 app.use(bodyparser.json())
 
-const allowedOrigins = ['https://stockpredict.wahyuwijaya.com/', 'https://www.stockpredict.wahyuwijaya.com/' ,  'http://192.168.8.103:8010', 'http://localhost:8010', "http://127.0.0.1:5173","http://127.0.0.1:4174" , "http://103.31.38.120"];
+const allowedOrigins = ['https://stockpredict.wahyuwijaya.com/', 'https://www.stockpredict.wahyuwijaya.com/',  'http://192.168.8.103:8010', 'http://localhost:8010', "http://127.0.0.1:5173","http://127.0.0.1:4174" , "http://103.31.38.120", 'https://api.stockpredict.wahyuwijaya.com', 'https://www.api.stockpredict.wahyuwijaya.com'];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps or curl requests)
