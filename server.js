@@ -24,18 +24,18 @@ dotenv.config()
 app = express()
 app.use(bodyparser.json())
 
-const allowedOrigins = [  'http://192.168.8.103:8010', 'http://localhost:8010', "http://127.0.0.1:5173","http://127.0.0.1:4174" ,'https://stockpredict.wahyuwijaya.com/', 'https://www.stockpredict.wahyuwijaya.com/',  "http://103.31.38.120", 'https://api.stockpredict.wahyuwijaya.com', 'https://www.api.stockpredict.wahyuwijaya.com'];
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
+// const allowedOrigins = [  'http://192.168.8.103:8010', 'http://localhost:8010', "http://127.0.0.1:5173","http://127.0.0.1:4174" ,'https://stockpredict.wahyuwijaya.com/', 'https://www.stockpredict.wahyuwijaya.com/',  "http://103.31.38.120", 'https://api.stockpredict.wahyuwijaya.com', 'https://www.api.stockpredict.wahyuwijaya.com'];
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // allow requests with no origin (like mobile apps or curl requests)
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+//       return callback(new Error(msg), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*'); // You can specify specific origins instead of '*'
