@@ -3,14 +3,32 @@ const { nanoid } = require('nanoid')
 
 const addStock = (ticker, nameStock) => {
     return new Promise((resolve, reject) => {
-        const id = nanoid(10)
-        const query = "INSERT INTO stock (id, ticker, name_stock) VALUES (?, ?,?)"
-        executeQuery(query, [id, ticker, nameStock], (err, result) => {
-            if (err) reject(err)
-            resolve(result)
-        })
-    })
-}
+        const id = nanoid(10);
+        const checkQuery = "SELECT COUNT(*) AS count FROM stock WHERE ticker = ?";
+        executeQuery(checkQuery, [ticker], (checkErr, checkResult) => {
+            if (checkErr) {
+                reject(checkErr);
+                return;
+            }
+
+            const stockExists = checkResult[0].count > 0;
+
+            if (stockExists) {
+                const errorMessage = "Stock with the provided ticker already exists.";
+                reject(new Error(errorMessage));
+            } else {
+                const insertQuery = "INSERT INTO stock (id, ticker, name_stock) VALUES (?, ?, ?)";
+                executeQuery(insertQuery, [id, ticker, nameStock], (insertErr, insertResult) => {
+                    if (insertErr) {
+                        reject(insertErr);
+                    } else {
+                        resolve(insertResult);
+                    }
+                });
+            }
+        });
+    });
+};
 
 const requestStock = (ticker, nameStock, reason) => {
     return new Promise((resolve, reject) => {
