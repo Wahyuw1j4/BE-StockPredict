@@ -37,12 +37,17 @@ app.use(bodyparser.json())
 //   }
 // }));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // You can specify specific origins instead of '*'
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*'); // You can specify specific origins instead of '*'
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// });
+
+// Enable CORS for all routes
+app.use(cors());
+
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
